@@ -15,8 +15,10 @@ import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import CreditCardOffOutlinedIcon from '@mui/icons-material/CreditCardOffOutlined';
 import { Link } from "react-router-dom"
+import { useAuth } from "../../context/AuthContext";
 
 const Sidebar = () => {
+    const { signOut } = useAuth();
     return (
         <div className="sidebar">
             <div className="top">
@@ -104,7 +106,7 @@ const Sidebar = () => {
                             <span>Settings</span>
                         </li>
                     </Link>
-                    <Link to="/logout" style={{textDecoration: "none"}}>
+                    <Link onClick={signOut} to="/logout" style={{textDecoration: "none"}}>
                         <li>
                             <ExitToAppOutlinedIcon className="icon" />
                             <span>Sair</span>

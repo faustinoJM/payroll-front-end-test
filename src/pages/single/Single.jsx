@@ -3,8 +3,34 @@ import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
 import Chart from "../../components/chart/Chart"
 import Table from "../../components/table/Table"
+import api from "../../services/api"
+import { useParams, useLocation} from 'react-router-dom';
+import { useEffect, useState } from "react"
+
 
 const Single = () => {
+    const [data, setData] = useState({});
+    // const params = useParams();
+    // const location = useLocation()
+    // console.log(params)
+    //  console.log(Object.values(params)[0])
+    //  const id = Object.values(params)[0];
+    // console.log(location)
+    // console.log(location.pathname.split("/")[2])
+    useEffect(() => {
+        async function fetch() {
+            // const str = "/employees/3d6c8e94-cfae-416c-942a-822f21c2702d"
+            const [ , , id] = window.location.pathname.split("/")
+            // const response = await api.get("employees/3d6c8e94-cfae-416c-942a-822f21c2702d")
+            const response = await api.get(`employees/${id}`)
+            // console.log(response)
+            setData(response.data)
+            // console.log(window.location.pathname); //yields: "/js" (where snisppets run)
+            // console.log(window.location.href); //yields: "https://stacksnippets.net/js
+            // console.log(window.location.href.split("/"))
+        }
+        fetch()
+    }, [])
     return (
         <div className="single">
             <Sidebar />
@@ -20,22 +46,22 @@ const Single = () => {
                                     alt=""
                              />
                              <div className="details">
-                                <h1 className="itemTitle">Jane Doe</h1>
+                                <h1 className="itemTitle">{data.name}</h1>
                                 <div className="detailItem">
                                     <span className="ItemKey">Email:</span>
-                                    <span className="itemValue">Janedoe@gmail.com</span>
+                                    <span className="itemValue">{data.name}@gmail.com</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Phone:</span>
-                                    <span className="itemValue">+ 2314 12 14</span>
+                                    <span className="itemValue">+ {data.id} 12 14</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Address:</span>
-                                    <span className="itemValue">Elton St. 234</span>
+                                    <span className="itemValue">Elton St. {data.updated_at}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Country:</span>
-                                    <span className="itemValue">USA</span>
+                                    <span className="itemValue">USA {data.salary}</span>
                                 </div>
                              </div>
                         </div>
