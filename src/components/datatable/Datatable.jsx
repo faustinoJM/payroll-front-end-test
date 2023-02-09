@@ -52,7 +52,8 @@ const Datatable = ({ listName, listPath, userColumns, userRows, setUserRows }) =
                 columns={userColumns.concat(actionColumn)}
                 pageSize={9}
                 rowsPerPageOptions={[9]}
-                checkboxSelection                             
+                checkboxSelection
+                autoHeight                           
                 />
         </div>
     )
