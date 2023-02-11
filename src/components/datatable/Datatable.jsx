@@ -16,7 +16,7 @@ const Datatable = ({ listName, listPath, userColumns, userRows, setUserRows }) =
     const actionColumn = [
         { 
             field: "action", 
-            headerName: "Action", 
+            headerName: "", 
             width: 200, 
             renderCell: (params) => {
                 return (
@@ -36,9 +36,9 @@ const Datatable = ({ listName, listPath, userColumns, userRows, setUserRows }) =
     return (
         <div className="datatable">
             <div className="datatableTitle">
-                Add New {listName}
+                {listName}
                 <Link to={`/${listPath}/new`} className="link">
-                    Add New
+                    Add Novo
                 </Link>
             </div>
 

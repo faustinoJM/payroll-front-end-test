@@ -38,8 +38,8 @@ const Single = () => {
                 <Navbar />
                 <div className="top">
                     <div className="left">
-                        <div className="editButton">Edit</div>
-                        <h1 className="title">Information</h1>
+                        <div className="editButton">Editar</div>
+                        <h1 className="title">Informacoes</h1>
                         <div className="item">
                             <img className="itemImg" 
                                     src="https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" 

@@ -2,12 +2,53 @@ import "./new.scss"
 import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import api from "../../services/api";
 
 
 const New = ({ inputs, title }) => {
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
 
     const [file, setFile] = useState("")
+
+    // const ds = useEffect(() => {
+    //     async function fetch() {
+    //         await api.post('departments', {
+    //             name
+    //         })
+    //     }
+
+    //     fetch()
+       
+    // }, [name])
+
+    
+    const ds = (async (e) => {
+        e.preventDefault()
+        async function fetch() {
+            await api.post('departments', {
+                name
+            })
+        }
+
+        fetch()
+  
+            //  await api.post('departments', {
+            //     name
+            // })
+       
+       
+    })
+
+    // const eTarget = (e) => {
+    //     setName(e.target.value)
+    // }
+
+    // const eTarget = (e) => {
+    //     setName(e.target.value)
+    // }
+    
     return (
         <div className="new">
             <Sidebar />
@@ -25,7 +66,7 @@ const New = ({ inputs, title }) => {
                         alt="" />
                     </div>
                     <div className="right">
-                        <form>
+                        <form onSubmit={ds}>
                             <div className="formInput">
                                 <label htmlFor="file">
                                     Image: <DriveFolderUploadOutlinedIcon className="icon" />
@@ -35,10 +76,10 @@ const New = ({ inputs, title }) => {
                             {inputs.map(input => (
                                 <div className="formInput" key={input.id}>
                                     <label>{input.label}</label>
-                                    <input type={input.type} placeholder={input.placeholder} />
+                                    <input type={input.type} placeholder={input.placeholder} value={name} onChange={e => setName(e.target.value)}/>
                                 </div>
                             ))}
-                            <button>Send</button>
+                            <button>Cadastrar</button>
                         </form>
                     </div>
                 </div>

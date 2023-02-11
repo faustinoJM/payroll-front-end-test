@@ -49,12 +49,12 @@ const Sidebar = () => {
                             <span>Cargo</span>
                         </li>
                     </Link>
-                    <Link to="/schedules" style={{textDecoration: "none"}}>
+                    {/* <Link to="/schedules" style={{textDecoration: "none"}}>
                         <li>
                             <AccessTimeOutlinedIcon className="icon" />
                             <span>Horario</span>
                         </li>
-                    </Link>
+                    </Link> */}
                     <p className="title">DEPARTAMENTOS</p>
                     <Link to="/departments" style={{textDecoration: "none"}}>
                         <li>
@@ -69,7 +69,7 @@ const Sidebar = () => {
                             <span>Pagamento</span>
                         </li>
                     </Link>
-                    <Link to="/attendace" style={{textDecoration: "none"}}>
+                    {/* <Link to="/attendace" style={{textDecoration: "none"}}>
                         <li>
                             <FactCheckOutlinedIcon className="icon" />
                             <span>Presencas</span>
@@ -92,7 +92,7 @@ const Sidebar = () => {
                             <CreditCardOffOutlinedIcon className="icon" />
                             <span>Deducao</span>
                         </li>
-                    </Link>
+                    </Link> */}
                     <p className="title">USUARIO</p>
                     <Link to="/profile" style={{textDecoration: "none"}}>
                         <li>
