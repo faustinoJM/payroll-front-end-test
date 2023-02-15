@@ -43,9 +43,11 @@
                 align-items: center;
                 padding: 5px;
                 cursor: pointer;
+                transition: opacity 3s;
 
                 &:hover {
                     background-color: #fff;
+                    opacity: 0.5;
                 }
 
                 .icon {

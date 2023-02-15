@@ -4,6 +4,8 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import NewEmployee from "./pages/new/NewEmployee";
+import NewDepartment from "./pages/new/NewDepartment"
+import NewPosition from "./pages/new/NewPosition";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { productInputs, productInputs1, userInputs } from "./formSource";
 import Setting from "./pages/settings/Setting";
@@ -26,7 +28,7 @@ function App() {
               <Route path="positions">
                 <Route index element={<List listName={"Cargo"} listPath={"positions"}/>} />
                 <Route path=":positionId" element={<Single/>} />
-                <Route path="new" element={<New inputs={productInputs} title="Add novo Cargo" />} />
+                <Route path="new" element={<NewPosition inputs={productInputs} title="Add novo Cargo" />} />
               </Route>
               <Route path="schedules">
                 <Route index element={<List listName={"Horario"} listPath={"schedules"}/>} />
@@ -36,7 +38,7 @@ function App() {
               <Route path="departments">
                 <Route index element={<List listName={"Departamentos"} listPath={"departments"}/>} />
                 <Route path=":departmentId" element={<Single/>} />
-                <Route path="new" element={<New inputs={productInputs1} title="Add novo Departamento" />} />
+                <Route path="new" element={<NewDepartment inputs={productInputs1} title="Add novo Departamento" />} />
               </Route>
               <Route path="payrolls">
                 <Route index element={<List listName={"Pagamento"} listPath={"payrolls"}/>} />
