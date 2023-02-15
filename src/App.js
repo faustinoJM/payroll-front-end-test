@@ -3,6 +3,7 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
+import NewEmployee from "./pages/new/NewEmployee";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { productInputs, productInputs1, userInputs } from "./formSource";
 import Setting from "./pages/settings/Setting";
@@ -20,7 +21,7 @@ function App() {
               <Route path="employees">
                 <Route index element={<List listName={"Funcionarios"} listPath={'employees'} />} />
                 <Route path=":employeeId" element={<Single/>} />
-                <Route path="new" element={<New inputs={userInputs} title="Add novo Funcionario" />} />
+                <Route path="new" element={<NewEmployee inputs={userInputs} title="Add novo Funcionario" />} />
               </Route>
               <Route path="positions">
                 <Route index element={<List listName={"Cargo"} listPath={"positions"}/>} />
