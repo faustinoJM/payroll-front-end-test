@@ -53,7 +53,10 @@ const Datatable = ({ listName, listPath, userColumns, userRows, setUserRows }) =
                 pageSize={9}
                 rowsPerPageOptions={[9]}
                 checkboxSelection
-                autoHeight                           
+                autoHeight        
+                // initialState={{
+                //     pinnedColumns: { left: ['action'] },
+                // }}                   
                 />
         </div>
     )
