@@ -3,9 +3,10 @@ import { DataGrid } from '@mui/x-data-grid';
 // import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom"
 import { useState } from "react";
+import { DataGridPro } from "@mui/x-data-grid-pro";
 
 
-const Datatable = ({ listName, listPath, userColumns, userRows, setUserRows }) => {
+const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
 //   const [data, setData] = useState(userRows);
 //   console.log(data)
 
@@ -21,13 +22,16 @@ const Datatable = ({ listName, listPath, userColumns, userRows, setUserRows }) =
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to={`/${listPath}/${params.row.id}`} style={{textDecoration: "none"}}>
-                            <div className="viewButton">View</div>
-                        </Link>
+                        {listPath === "payrolls" || "employees" ? 
+                            <Link to={`/${listPath}/${params.row.id}`} style={{textDecoration: "none"}}>
+                                <div className="viewButton">Ver</div>
+                            </Link>
+                            :
+                            ""}
                         <Link to="" style={{textDecoration: "none"}}>
-                            <div className="editButton">Edit</div>
+                            <div className="editButton">Editar</div>
                         </Link>
-                        <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>Delete</div>
+                        <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>Remover</div>
                     </div>
                 )
             }
@@ -44,19 +48,47 @@ const Datatable = ({ listName, listPath, userColumns, userRows, setUserRows }) =
 
             <DataGrid
             sx={{
-                "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-                   outline: "none !important",
-                },
+                "& .MuiDataGrid-main": {
+                    // remove overflow hidden overwise sticky does not work
+                    overflow: "unset"
+                  },
+                // "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                //    outline: "none !important",
+                // },
+                // '.MuiDataGrid-virtualScroller': {
+                //     height: '260px !important',
+                //     overflowY: 'auto',
+                //   },
+                //   '& .MuiDataGrid-cell:first-child': {
+                //     position:"sticky",
+                //     left:"0",
+                //     zIndex:"1",
+                //     backgroundColor: "grey"
+                //   },
+                //   '& .MuiDataGrid-columnHeader:first-child': {
+                //     position:"sticky !important",
+                //     left:"0 !important",
+                //     top: "0 !important",
+                //     zIndex:1,
+                //     backgroundColor:"grey"
+                //   },
+                //   '& .MuiDataGrid-columnHeader': { 
+                //     "& .MuiDataGrid-row": {
+                //         "&:nth-child(2n)": { backgroundColor: "red"}
+                //   }
+                // },
+                                               
              }}
+                 columnBuffer={columns.length}
                 rows={userRows}
-                columns={userColumns.concat(actionColumn)}
+                columns={columns.concat(actionColumn)}
                 pageSize={9}
                 rowsPerPageOptions={[9]}
                 checkboxSelection
                 autoHeight        
-                // initialState={{
-                //     pinnedColumns: { left: ['action'] },
-                // }}                   
+                initialState={{
+                    pinnedColumns: { left: ['id', 'name'] },
+                }}                   
                 />
         </div>
     )

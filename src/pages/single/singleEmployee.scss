@@ -5,16 +5,15 @@
     .singleContainer {
         flex: 6;
 
-        .top {
+        .top, .bottom {
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
             padding: 20px;
+            margin: 5px 20px;
             display: flex;
-            gap: 20px;
 
             .left {
                 flex: 1;
-                -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-                box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-                padding: 20px;
                 position: relative;
 
                 .editButton {
@@ -23,8 +22,8 @@
                     right: 0;
                     padding: 5px;
                     font-size: 12px;
-                    color: #7451f8;
-                    background-color: #7551f818;
+                    color: white;
+                    background-color: green;
                     cursor: pointer;
                     border-radius: 0px 5px 0 5px;
                 }
@@ -32,7 +31,6 @@
                 .item {
                     display: flex;
                     gap: 20px;
-                    
 
                     .itemImg {
                         width: 100px;
@@ -53,15 +51,16 @@
 
                             .ItemKey {
                                 font-weight: bold;
-                                color: gray;
+                                color: rgb(49, 48, 48);
                                 margin-right: 5px;
                             }
 
                             .itemValue {
                                 font-weight: 300;
+                                
                             }
                         }
-                        
+
                         h2 {
                             margin: 8px 0;
                         }
@@ -73,21 +72,12 @@
                 flex: 2;
             }
         }
-        
-        .bottom {
-        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-        padding: 20px;
-        margin: 10px 20px;
-        }
 
         .title {
             font-size: 16px;
-            color: lightgray;
+            color: black;
             margin-bottom: 20px;
         }
 
     }
-
-   
 }

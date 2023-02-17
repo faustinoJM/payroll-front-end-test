@@ -10,6 +10,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { productInputs, productInputs1, userInputs } from "./formSource";
 import Setting from "./pages/settings/Setting";
 import { AuthProvider } from "./context/AuthContext";
+import SingleEmployee from "./pages/single/SingleEmployee";
+import ListPosition from "./pages/list/ListPosition";
+import ListDepartment from "./pages/list/ListDepartment";
+import ListPayroll from "./pages/list/ListPayroll";
+import ListEmployee from "./pages/list/ListEmployee";
 
 function App() {
   return (
@@ -21,12 +26,12 @@ function App() {
               <Route index element={<Home/>} />
               <Route path="login" element={<Login/>} />
               <Route path="employees">
-                <Route index element={<List listName={"Funcionarios"} listPath={'employees'} />} />
-                <Route path=":employeeId" element={<Single/>} />
+                <Route index element={<ListEmployee listName={"Funcionarios"} listPath={'employees'} />} />
+                <Route path=":employeeId" element={<SingleEmployee/>} />
                 <Route path="new" element={<NewEmployee inputs={userInputs} title="Add novo Funcionario" />} />
               </Route>
               <Route path="positions">
-                <Route index element={<List listName={"Cargo"} listPath={"positions"}/>} />
+                <Route index element={<ListPosition listName={"Cargo"} listPath={"positions"}/>} />
                 <Route path=":positionId" element={<Single/>} />
                 <Route path="new" element={<NewPosition inputs={productInputs} title="Add novo Cargo" />} />
               </Route>
@@ -36,12 +41,12 @@ function App() {
                 <Route path="new" element={<New inputs={productInputs} title="Add novo Horario" />} />
               </Route>
               <Route path="departments">
-                <Route index element={<List listName={"Departamentos"} listPath={"departments"}/>} />
+                <Route index element={<ListDepartment listName={"Departamentos"} listPath={"departments"}/>} />
                 <Route path=":departmentId" element={<Single/>} />
                 <Route path="new" element={<NewDepartment inputs={productInputs1} title="Add novo Departamento" />} />
               </Route>
               <Route path="payrolls">
-                <Route index element={<List listName={"Pagamento"} listPath={"payrolls"}/>} />
+                <Route index element={<ListPayroll listName={"Pagamento"} listPath={"payrolls"}/>} />
                 <Route path=":payrollId" element={<Single/>} />
                 <Route path="new" element={<New inputs={productInputs} title="Add novo Pagamento" />} />
               </Route>
