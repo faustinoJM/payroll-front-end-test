@@ -15,6 +15,7 @@ import ListPosition from "./pages/list/ListPosition";
 import ListDepartment from "./pages/list/ListDepartment";
 import ListPayroll from "./pages/list/ListPayroll";
 import ListEmployee from "./pages/list/ListEmployee";
+import NewPayroll from "./pages/new/NewPayroll";
 
 function App() {
   return (
@@ -46,9 +47,9 @@ function App() {
                 <Route path="new" element={<NewDepartment inputs={productInputs1} title="Add novo Departamento" />} />
               </Route>
               <Route path="payrolls">
-                <Route index element={<ListPayroll listName={"Pagamento"} listPath={"payrolls"}/>} />
+                <Route index element={<ListPayroll listName={"Salario"} listPath={"payrolls"}/>} />
                 <Route path=":payrollId" element={<Single/>} />
-                <Route path="new" element={<New inputs={productInputs} title="Add novo Pagamento" />} />
+                <Route path="new" element={<NewPayroll inputs={productInputs} title="Add novo Pagamento" />} />
               </Route>
               <Route path="attendace">
                 <Route index element={<List listName={"Presenca"} listPath={"attendace"}/>} />

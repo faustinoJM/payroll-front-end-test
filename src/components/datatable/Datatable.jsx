@@ -41,6 +41,36 @@ const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
         <div className="datatable">
             <div className="datatableTitle">
                 {listName}
+                {listPath === "payrolls" ? 
+                <div className="anoMes">
+                    <label>Ano: </label>
+                        <select id="year" name="year" onChange={e => (e.target.value)}>
+                            <option value="">Selecione Ano</option>
+                            <option value="janeiro">2020</option>
+                            <option value="fevereiro">2021</option>
+                            <option value="marco">2022</option>
+                            <option value="abril">2023</option>
+                            <option value="maio">2024</option>
+                        </select>
+                    <label>Mes: </label>
+                        <select id="mouth" name="mouth" onChange={e => (e.target.value)}>
+                            <option value="">Selecione Mes</option>
+                            <option value="janeiro">Janeiro</option>
+                            <option value="fevereiro">Fevereiro</option>
+                            <option value="marco">Marco</option>
+                            <option value="abril">Abril</option>
+                            <option value="maio">Maio</option>
+                            <option value="junho">Junho</option>
+                            <option value="julho">Julho</option>
+                            <option value="agosto">Agosto</option>
+                            <option value="setembro">Setembro</option>
+                            <option value="outubro">Outubro</option>
+                            <option value="novembro">Novembro</option>
+                            <option value="dezembro">Dezembro</option>
+                        </select>
+                </div> 
+                    :  ""
+                }
                 <Link to={`/${listPath}/new`} className="link">
                     Add Novo
                 </Link>
