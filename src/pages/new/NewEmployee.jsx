@@ -15,13 +15,16 @@ import "react-datepicker/dist/react-datepicker.css"
 
 const NewEmployee = ({ inputs, title }) => {
      const [file, setFile] = useState("")
+     const navigate = useNavigate()
 
      const onSubmit = async (values, actions) => {
         console.log(values)
         console.log(actions)
         console.log("submit")
-        await new Promise((resolve) => setTimeout(resolve, 100))
         actions.resetForm()
+        await api.post('employees', values)
+        actions.resetForm()
+        navigate("/employees")
      }
 
      const schema = Yup.object().shape({
@@ -37,7 +40,7 @@ const NewEmployee = ({ inputs, title }) => {
         email: Yup.string().required("Email Obrigatorio").email("Insira endereco Email valido"),
         nuit: Yup.number().positive("NUIT deve ser numero positivo").integer("NUIT deve ser numero inteiro").required("NUIT obrigatorio"),
         dependents: Yup.number().positive("Deve ser numero positivo").integer("Deve ser numero inteiro").required("Numero de Dependentes obrigatorio"),
-        base_salary: Yup.number().positive("Deve ser numero positivo").required("Salario base obrigatorio"),
+        salary: Yup.number().positive("Deve ser numero positivo").required("Salario base obrigatorio"),
         bonus: Yup.number().min(0, "Subsidio deve ser maior ou igual a zero"),
         department: Yup.string().required("Endereco Obrigatorio"),
         position: Yup.string().required("Endereco Obrigatorio"),
@@ -63,7 +66,7 @@ const NewEmployee = ({ inputs, title }) => {
             email: "",
             nuit: "",
             dependents: "",
-            base_salary: "",
+            salary: "",
             bonus: 0,
             department: "",
             position: "",
@@ -232,9 +235,9 @@ const NewEmployee = ({ inputs, title }) => {
                                 </div>
                                 <div className="formInput2">
                                     <label>Salario Base</label>
-                                        <input className="inputClass" type="number" id="base_salary"
-                                                 value={values.base_salary} onChange={handleChange} onBlur={handleBlur}/>
-                                                  {errors.base_salary && touched.base_salary && <p>{errors.base_salary}</p>}   
+                                        <input className="inputClass" type="number" id="salary"
+                                                 value={values.salary} onChange={handleChange} onBlur={handleBlur}/>
+                                                  {errors.salary && touched.salary && <p>{errors.salary}</p>}   
                                     <label>Subsidio</label>
                                         <input className="inputClass" type="number" defaultValue={0} id="bonus"
                                                  value={values.bonus} onChange={handleChange} onBlur={handleBlur}/>

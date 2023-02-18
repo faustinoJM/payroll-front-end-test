@@ -72,7 +72,7 @@ const SingleEmployee = () => {
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Numero de Dependentes:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.dependents}</span>
                                 </div>
                                 <hr />
                                 <h2 className="title">Informacoes da Empresa</h2>
@@ -86,7 +86,7 @@ const SingleEmployee = () => {
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Salario Base:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.salary}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Bonus:</span>

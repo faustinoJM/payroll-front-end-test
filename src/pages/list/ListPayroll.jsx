@@ -20,8 +20,8 @@ const payrollColumns = [
     { field: "IRPS",  headerName: "IRPS", width: 130},
     { field: "INSS",  headerName: "INSS", width: 130},
     { field: "salary_liquid",headerName: "SALARIO LIQUIDO", width: 150},
-    { field: "month",headerName: "MES", width: 50},
-    { field: "year",headerName: "ANO", width: 70}
+    // { field: "month",headerName: "MES", width: 50},
+    // { field: "year",headerName: "ANO", width: 70}
 ]
 
 const ListPayroll = ({ listName, listPath }) => {

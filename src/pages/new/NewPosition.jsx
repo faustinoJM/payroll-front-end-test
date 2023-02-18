@@ -10,13 +10,15 @@ import "react-datepicker/dist/react-datepicker.css"
 
 
 const NewPosition = ({ inputs, title }) => {
-
+    const navigate = useNavigate()
      const onSubmit = async (values, actions) => {
         console.log(values)
         console.log(actions)
+        const { name } = values
         console.log("submit")
-        await new Promise((resolve) => setTimeout(resolve, 100))
+        await api.post('positions', {name})
         actions.resetForm()
+        navigate("/positions")
      }
 
      const schema = Yup.object().shape({

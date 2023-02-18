@@ -8,15 +8,15 @@ import api from "../../services/api"
 
 const employeeColumns = [
     { field: 'id', headerName: 'ID', width: 70, pinnable: true },
-    { field: 'name', headerName: 'NOME', width: 100,},
-    { field: "birth_date", headerName:"DATA NASCIMENTO", width: 120 },
+    { field: 'name', headerName: 'NOME', width: 100, editable: true},
+    { field: "birth_date", headerName:"DATA NASCIMENTO", width: 160 },
     { field: "gender", headerName: "GENERO", width: 130},
     { field: "address", headerName: "ENDERECO", width: 130},
     { field: "contact", headerName: "CONTANCTO", width: 130},
     { field: "email",  headerName: "EMAIL", width: 100},
     { field: "nuit",  headerName: "NUIT", width: 130},
     { field: "dependents",  headerName: "DEPENDENTES", width: 130},
-    { field: "base_salary",  headerName: "SALARIO BASE", width: 130},
+    { field: "salary",  headerName: "SALARIO BASE", width: 130},
     { field: "bonus",  headerName: "BONUS", width: 130},
     { field: "bank_name",headerName: "NOME DO BANCO", width: 50},
     { field: "bank_account",headerName: "NUMERO DA CONTA", width: 50},
