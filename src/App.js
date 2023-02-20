@@ -16,16 +16,18 @@ import ListDepartment from "./pages/list/ListDepartment";
 import ListPayroll from "./pages/list/ListPayroll";
 import ListEmployee from "./pages/list/ListEmployee";
 import NewPayroll from "./pages/new/NewPayroll";
+import Routers from "./routes";
+import RequireAuth from "./routes/RequireAuth";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
+          {/* <Routes>
             <Route path="/" >
-              <Route index element={<Home/>} />
-              <Route path="login" element={<Login/>} />
+              <Route index element={<Login/>} />
+              <Route path="dashboard" element={<Home/>} />
               <Route path="employees">
                 <Route index element={<ListEmployee listName={"Funcionarios"} listPath={'employees'} />} />
                 <Route path=":employeeId" element={<SingleEmployee/>} />
@@ -79,11 +81,49 @@ function App() {
               <Route path="settings">
                 <Route index element={<Setting/>} />
               </Route>
-              <Route path="logout">
+              <Route path="/">
                 <Route index element={<Login/>} />
               </Route>
             </Route>          
-          </Routes>
+          </Routes> */}
+          <Routers />
+          {/* <Routes>
+            <Route path="/" >
+              <Route index element={<RequireAuth><Home/></RequireAuth>} />
+              <Route path="login" element={<Login/>} />
+              <Route path="employees">
+                <Route index element={<RequireAuth><ListEmployee listName={"Funcionarios"} listPath={'employees'} /></RequireAuth>} />
+                <Route path=":employeeId" element={<RequireAuth><SingleEmployee/></RequireAuth>} />
+                <Route path="new" element={<RequireAuth><NewEmployee title="Add novo Funcionario" /> </RequireAuth>} />
+              </Route>
+              <Route path="positions">
+                <Route index element={ <RequireAuth><ListPosition listName={"Cargo"} listPath={"positions"}/></RequireAuth>} />
+                <Route path=":positionId" element={<RequireAuth><Single/></RequireAuth>} />
+                <Route path="new" element={<RequireAuth><NewPosition title="Add novo Cargo" /></RequireAuth>} />
+              </Route>
+              <Route path="departments">
+                <Route index element={<RequireAuth><ListDepartment listName={"Departamentos"} listPath={"departments"}/></RequireAuth>} />
+                <Route path=":departmentId" element={<RequireAuth><Single/></RequireAuth>} />
+                <Route path="new" element={<RequireAuth><NewDepartment title="Add novo Departamento"/></RequireAuth>} />
+              </Route>
+              <Route path="payrolls">
+                <Route index element={<RequireAuth><ListPayroll listName={"Salario"} listPath={"payrolls"}/> </RequireAuth>} />
+                <Route path=":payrollId" element={<RequireAuth><Single/></RequireAuth>} />
+                <Route path="new" element={<RequireAuth><NewPayroll title="Add novo Pagamento" /></RequireAuth>} />
+              </Route>
+              <Route path="profile">
+                <Route index element={<RequireAuth><List listName={"Perfil"} listPath={"profile"}/></RequireAuth>} />
+                <Route path=":profileId" element={<RequireAuth><Single/></RequireAuth>} />
+                <Route path="new" element={<RequireAuth><New title="Add novo Perfil" /></RequireAuth>} />
+              </Route>
+              <Route path="settings">
+                <Route index element={<RequireAuth><Setting/></RequireAuth>} />
+              </Route>
+              <Route path="login">
+                <Route index element={<Login/>} />
+              </Route>
+            </Route>          
+          </Routes> */}
         </AuthProvider>    
       </BrowserRouter>
     </div>

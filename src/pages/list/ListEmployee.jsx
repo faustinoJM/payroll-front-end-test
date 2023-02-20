@@ -8,23 +8,23 @@ import api from "../../services/api"
 
 const employeeColumns = [
     { field: 'id', headerName: 'ID', width: 70, pinnable: true },
-    { field: 'name', headerName: 'NOME', width: 100, editable: true},
-    { field: "birth_date", headerName:"DATA NASCIMENTO", width: 160 },
-    { field: "gender", headerName: "GENERO", width: 130},
-    { field: "address", headerName: "ENDERECO", width: 130},
-    { field: "contact", headerName: "CONTANCTO", width: 130},
-    { field: "email",  headerName: "EMAIL", width: 100},
-    { field: "nuit",  headerName: "NUIT", width: 130},
-    { field: "dependents",  headerName: "DEPENDENTES", width: 130},
-    { field: "salary",  headerName: "SALARIO BASE", width: 130},
-    { field: "bonus",  headerName: "BONUS", width: 130},
-    { field: "bank_name",headerName: "NOME DO BANCO", width: 50},
-    { field: "bank_account",headerName: "NUMERO DA CONTA", width: 50},
-    { field: "nib",headerName: "NIB", width: 50},
-    { field: "social_security",headerName: "NUMERO SEG. SOCIAL", width: 50},
-    { field: "start_date",headerName: "DATA INICIO", width: 150},
-    { field: "end_date",headerName: "DATA FIM", width: 50},
-    { field: "employee_status",headerName: "ESTADO", width: 70,}
+    { field: 'name', headerName: 'Nome', width: 150, editable: true, align:'center', headerAlign: 'center'},
+    { field: "birth_date", headerName:"Data Nascimento", width: 160,  },
+    { field: "gender", headerName: "Genero", width: 130, align:'center', headerAlign: 'center' },
+    { field: "address", headerName: "Endereco", width: 130, align:'center', headerAlign: 'center' },
+    { field: "contact", headerName: "Contacto", width: 130, align:'center', headerAlign: 'center' },
+    { field: "email",  headerName: "Email", width: 100, align:'center', headerAlign: 'center' },
+    { field: "nuit",  headerName: "NUIT", width: 130, align:'center', headerAlign: 'center' },
+    { field: "dependents",  headerName: "Dependentes", width: 120, align:'center', headerAlign: 'center' },
+    { field: "salary",  headerName: "Salario Base", width: 130, align:'center', headerAlign: 'center' },
+    { field: "bonus",  headerName: "Bonus", width: 100, align:'center', headerAlign: 'center' },
+    { field: "bank_name",headerName: "Nome do Banco", width: 130, align:'center', headerAlign: 'center' },
+    { field: "bank_account",headerName: "Numero da Conta", width: 130, align:'center', headerAlign: 'center' },
+    { field: "nib",headerName: "NIB", width: 50, align:'center', headerAlign: 'center' ,},
+    { field: "social_security",headerName: "Numero Seg. Social", width: 130, align:'center', headerAlign: 'center'},
+    { field: "start_date",headerName: "Data Inicio", width: 100,align:'center', headerAlign: 'center' },
+    { field: "end_date",headerName: "Data Fim", width: 100, align:'center', headerAlign: 'center' },
+    { field: "employee_status",headerName: "Estado", width: 70, align:'center', headerAlign: 'center' }
     
 
 ]

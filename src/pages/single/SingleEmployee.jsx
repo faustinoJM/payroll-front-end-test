@@ -40,35 +40,43 @@ const SingleEmployee = () => {
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Email:</span>
-                                    <span className="itemValue">{data.name}@gmail.com</span>
+                                    <span className="itemValue">{data.email}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Contacto:</span>
-                                    <span className="itemValue"></span>
+                                    <span className="itemValue">{data.contact}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Data de Nascimento:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.birth_date}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Numero de BI:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.bi}</span>
+                                </div>
+                                <div className="detailItem">
+                                    <span className="ItemKey">Nacionalidade:</span>
+                                    <span className="itemValue">{data.nationality}</span>
+                                </div>
+                                <div className="detailItem">
+                                    <span className="ItemKey">Naturalidade:</span>
+                                    <span className="itemValue">{data.place_birth}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Estado Civil:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.marital_status}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Sexo:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.gender}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Residencia:</span>
-                                    <span className="itemValue">+ {data.id} 12 14</span>
+                                    <span className="itemValue">{data.address}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">NUIT:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.nuit}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Numero de Dependentes:</span>
@@ -78,11 +86,11 @@ const SingleEmployee = () => {
                                 <h2 className="title">Informacoes da Empresa</h2>
                                 <div className="detailItem">
                                     <span className="ItemKey">Departamento:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.department_id}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Cargo:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.position_id}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Salario Base:</span>
@@ -90,37 +98,37 @@ const SingleEmployee = () => {
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Bonus:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.bonus}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Data do inicio:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.start_date}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Data do fim:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.end_date}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Estado do funcionario:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.employee_status}</span>
                                 </div>
                                 <hr />
                                 <h2 className="title">Informacoes da Financeiras</h2>
                                 <div className="detailItem">
                                     <span className="ItemKey">Nome do banco:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.bank_name}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Numero da Conta Bancaria:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.bank_account}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">NIB:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.nib}</span>
                                 </div>
                                 <div className="detailItem">
                                     <span className="ItemKey">Numero Seg. Social:</span>
-                                    <span className="itemValue">{data.name}</span>
+                                    <span className="itemValue">{data.social_security}</span>
                                 </div>
                              </div>     
                         </div>

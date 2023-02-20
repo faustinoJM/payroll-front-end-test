@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 
 // interface AuthState {
@@ -20,6 +21,7 @@ import api from '../services/api';
 const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
+  const navigate = useNavigate();
   const [data, setData] = useState(() => {
     const refresh_token = localStorage.getItem('@ConsulPayroll:refresh_token')
     const user = localStorage.getItem('@ConsulPayroll:user')
@@ -49,6 +51,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   const signOut = useCallback(() => {
+    // navigate("/login")
     localStorage.removeItem('@ConsulPayroll:refresh_token')
     localStorage.removeItem('@ConsulPayroll:user')
   }, [])

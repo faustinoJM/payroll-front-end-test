@@ -47,9 +47,9 @@ const NewEmployee = ({ inputs, title }) => {
         start_date: Yup.date().required("selecione data de Inicio"),
         employee_status: Yup.string().required("Estado obrigatorio"),
         bank_name: Yup.string().required("Nome do banco Obrigatorio"),
-        bank_account: Yup.number().positive("Deve ser numero positivo").required("Numero da conta bancaria obrigatorio"),
-        nib: Yup.number().positive("Deve ser numero positivo").required("Numero de NIB obrigatorio"),
-        social_security: Yup.number().positive("Deve ser numero positivo").required("Numero de INSS obrigatorio") 
+        bank_account: Yup.number().positive("Deve ser numero positivo").integer("Deve ser numero inteiro").required("Numero da conta bancaria obrigatorio"),
+        nib: Yup.number().positive("Deve ser numero positivo").integer("Deve ser numero inteiro").required("Numero de NIB obrigatorio"),
+        social_security: Yup.number().positive("Deve ser numero positivo").integer("Deve ser numero inteiro").required("Numero de INSS obrigatorio") 
 
     })
     const { values, errors, handleChange, touched, isSubmitting, handleBlur, handleSubmit, setFieldValue} = useFormik({

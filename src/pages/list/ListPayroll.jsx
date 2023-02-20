@@ -7,19 +7,19 @@ import { Link } from "react-router-dom"
 import api from "../../services/api"
 
 const payrollColumns = [
-    { field: 'id', headerName: 'ID', width: 70, pinnable: true },
-    { field: 'name', headerName: 'NOME', width: 100},
-    { field: "dependents", headerName:"DEPENDENTES", width: 120 },
-    { field: "salary_base", headerName: "SALARIO BASE", width: 130},
-    { field: "Overtime50", headerName: "HORAS EXTRA 50%", width: 130},
-    { field: "Overtime100", headerName: "HORAS EXTRA 100%", width: 130},
-    { field: "bonus", headerName: "BONUS", width: 130},
-    { field: "absences",  headerName: "FALTAS", width: 100},
-    { field: "cashAdvances",  headerName: "ADIANTAMENTOS", width: 130},
-    { field: "totalIncome",  headerName: "RENDIMENTO TOTAL", width: 130},
-    { field: "IRPS",  headerName: "IRPS", width: 130},
-    { field: "INSS",  headerName: "INSS", width: 130},
-    { field: "salary_liquid",headerName: "SALARIO LIQUIDO", width: 150},
+    { field: 'id', headerName: 'ID', width: 70, pinnable: true, headerAlign: 'center',},
+    { field: 'name', headerName: 'Nome', width: 100, headerAlign: 'center',},
+    { field: "dependents", headerName:"Dependentes", width: 120,  align:'center', headerAlign: 'center', },
+    { field: "salary_base", headerName: "Salario Base", width: 130, align:'center', headerAlign: 'center',},
+    { field: "Overtime50", headerName: "Horas Extras 50%", width: 135,  align:'center', headerAlign: 'center',},
+    { field: "Overtime100", headerName: "Horas Extras 100%", width: 140,  align:'center', headerAlign: 'center',},
+    { field: "bonus", headerName: "Bonus", width: 100, align:'center', headerAlign: 'center',},
+    { field: "absences",  headerName: "Faltas", width: 100,  align:'center', headerAlign: 'center',},
+    { field: "cashAdvances",  headerName: "Adiantamentos", width: 130,  align:'center', headerAlign: 'center',},
+    { field: "totalIncome",  headerName: "Rendimento Total", width: 130,  align:'center', headerAlign: 'center',},
+    { field: "IRPS",  headerName: "IRPS", width: 130,  align:'center', headerAlign: 'center',},
+    { field: "INSS",  headerName: "INSS", width: 130, align:'center', headerAlign: 'center',},
+    { field: "salary_liquid",headerName: "Salario Liquido", width: 150, align:'center', headerAlign: 'center',},
     // { field: "month",headerName: "MES", width: 50},
     // { field: "year",headerName: "ANO", width: 70}
 ]

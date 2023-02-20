@@ -106,7 +106,7 @@ const Sidebar = () => {
                             <span>Settings</span>
                         </li>
                     </Link>
-                    <Link onClick={signOut} to="/logout" style={{textDecoration: "none"}}>
+                    <Link onClick={signOut} to="/login" style={{textDecoration: "none"}}>
                         <li>
                             <ExitToAppOutlinedIcon className="icon" />
                             <span>Sair</span>

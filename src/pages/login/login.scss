@@ -16,7 +16,7 @@
         // border: 1px solid gray;
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgb(201, 201, 201);
-        padding: 16px;
+        padding: 32px 0;
 
         h1 {
             text-align: center;
@@ -37,17 +37,20 @@
                 padding: 8px;
                 //  border: none;
                 // outline: none;
-                 border: 2px solid gray;
+                 border: 2px solid #1e293b;
+
             }  
         }
 
         button {
             margin: 4px 32px;
-            background-color: #99a4af;
+            // background-color: #99a4af;
+            background-color: #1e293b;
             border-radius: 4px;
             padding: 8px;
             border: none;
             cursor: pointer;
+            color: white;
         }
 
         
