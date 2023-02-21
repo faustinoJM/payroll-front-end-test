@@ -41,8 +41,7 @@ const EditEmployee = ({ inputs, title }) => {
     useEffect(() => {
         async function fetch() {
          const response = await api.get(`employees/${params.employeeId}`)
-         let [d, m , a]= response.data.birth_date.split("/")
-         console.log(a)
+
          setData(response.data)
          
         } 
