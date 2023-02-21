@@ -15,7 +15,6 @@ const EditDepartment = ({ inputs, title }) => {
     const id = Object.values(params)[0]
     const [data, setData] = useState({});
 
-
     useEffect(() => {
         async function fetch() {
             const response = await api.get(`departments/${id}`)
@@ -42,10 +41,11 @@ const EditDepartment = ({ inputs, title }) => {
     })
     const { values, errors, handleChange, touched, isSubmitting, handleBlur, handleSubmit} = useFormik({
         initialValues: {
-            name: "",
+            name: data.name,
             description: "",
         },
         validationSchema: schema,
+        enableReinitialize: true,
         onSubmit 
     })
     console.log(errors)
@@ -65,7 +65,7 @@ const EditDepartment = ({ inputs, title }) => {
                             <div className="formInput1">
                                 <label>Nome do Departemento</label>
                                     <input className="inputClass" type="text" id="name" 
-                                            defaultValue={data.name} onChange={handleChange} onBlur={handleBlur}/>
+                                          defaultValue={data.name} onChange={handleChange} onBlur={handleBlur}/>
                                     {errors.name && touched.name && <p>{errors.name}</p>}
                                 <label>Descricao</label>
                                     <input className="inputClass" type="text" id="description"

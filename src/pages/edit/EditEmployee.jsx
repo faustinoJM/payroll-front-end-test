@@ -1,4 +1,4 @@
-import "./NewEmployee.scss"
+import "./editEmployee.scss"
 import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
@@ -7,40 +7,51 @@ import { useFormik } from "formik"
 import { useField } from '@unform/core';
 import getValidateErrors from "../../utils/getValidationErrors"
 import * as Yup from "yup"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import api from "../../services/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 
 
-const NewEmployee = ({ inputs, title }) => {
+const EditEmployee = ({ inputs, title }) => {
      const [file, setFile] = useState("")
      const [listDepartment, setListDepartment] = useState([])
      const [listPosition, setListPosition] = useState([])
+     const [data, setData] = useState({});
      const navigate = useNavigate()
+     const params = useParams()
+
 
      useEffect(() => {
        async function fetch() {
-        const response = await api.get("departments")
-        setListDepartment(response.data)
+        const response = await api.get('positions')
+        setListPosition(response.data)
        } 
        fetch()
      }, [])
 
      useEffect(() => {
         async function fetch() {
-         const response = await api.get("positions")
-         setListPosition(response.data)
+         const response = await api.get('departments')
+         setListDepartment(response.data)
         } 
         fetch()
       }, [])
 
+    useEffect(() => {
+        async function fetch() {
+         const response = await api.get(`employees/${params.employeeId}`)
+         let [d, m , a]= response.data.birth_date.split("/")
+         console.log(a)
+         setData(response.data)
+         
+        } 
+        fetch()
+      }, [params])
+      
      const onSubmit = async (values, actions) => {
-        console.log(values)
-        console.log(actions)
-        console.log("submit")
         actions.resetForm()
-        await api.post('employees', values)
+        await api.put(`employees/${params.employeeId}`, values)
         actions.resetForm()
         navigate("/employees")
      }
@@ -72,31 +83,32 @@ const NewEmployee = ({ inputs, title }) => {
     })
     const { values, errors, handleChange, touched, isSubmitting, handleBlur, handleSubmit, setFieldValue} = useFormik({
         initialValues: {
-            name: "",
-            birth_date: "",// new Date(),
-            place_birth: "",
-            nationality: "",
-            bi: "",
+            name: data.name,
+            birth_date: new Date(),
+            place_birth: data.place_birth,
+            nationality: data.nationality,
+            bi: data.bi,
             marital_status: "",
-            gender: "",
-            address: "",
-            contact: "",
-            email: "",
-            nuit: "",
-            dependents: "",
-            salary: "",
-            bonus: 0,
+            gender: data.gender,
+            address: data.address,
+            contact: data.contact,
+            email: data.email,
+            nuit: data.nuit,
+            dependents: data.dependents,
+            salary: data.salary,
+            bonus: data.bonus,
             department_id: "",
             position_id: "",
-            start_date: "",
+            start_date: new Date("199-02-02"),
             end_date: "",
             employee_status: "",
-            bank_name: "",
-            bank_account: "",
-            nib: "",
-            social_security: "",
+            bank_name: data.bank_name,
+            bank_account: data.bank_account,
+            nib: data.nib,
+            social_security: data.social_security
         },
         validationSchema: schema,
+        enableReinitialize: true,
         onSubmit 
     })
     console.log(errors)
@@ -120,30 +132,31 @@ const NewEmployee = ({ inputs, title }) => {
                                     <div className="formInput1">
                                         <label>Nome</label>
                                             <input className={`inputClass ${errors.name && touched.name? "input-error" : ""}`} type="text" id="name" 
-                                                    value={values.name} onChange={handleChange} onBlur={handleBlur}/>
+                                                    defaultValue={data.name} onChange={handleChange} onBlur={handleBlur}/>
                                             {errors.name && touched.name && <p>{errors.name}</p>}
                                         <label>Data de Nascimento</label>
                                             <DatePicker className="DatePicker" dateFormat="dd/MM/yyyy" selected={values.birth_date} 
                                                      id="birth_date"
-                                                    //  name="data"
-                                                    onChange={birth_date => setFieldValue('birth_date', birth_date)}
+                                                     onChange={birth_date => setFieldValue('birth_date', birth_date)}
                                                      onBlur={handleBlur}/>
                                                      {errors.birth_date && touched.birth_date && <p>{errors.birth_date}</p>}
+                                                     {/* {console.log(data.birth_date) } */}
+                                                     
                                         {/* <label>Idade</label>
                                             <input className="inputClass" type="number" id="idade"
-                                                 value={values.idade} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={values.idade} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.idade && touched.idade && <p>{errors.idade}</p>}  */}
                                         <label>Naturalidade</label>
                                             <input className="inputClass" type="text" id="place_birth"
-                                                 value={values.place_birth} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.place_birth} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.place_birth && touched.place_birth && <p>{errors.place_birth}</p>} 
                                         <label>Nacionalidade</label>
                                             <input className="inputClass" type="text" id="nationality"
-                                                 value={values.nationality} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.nationality} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.nationality && touched.nationality && <p>{errors.nationality}</p>}
                                         <label>Numero de BI</label>
                                             <input className="inputClass" type="text" id="bi"
-                                                 value={values.bi} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.bi} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.bi && touched.bi && <p>{errors.bi}</p>}
                                         <label for="">Estado Civil:</label>
                                             <select id="marital_status" name="marital_status" 
@@ -165,24 +178,24 @@ const NewEmployee = ({ inputs, title }) => {
                                     <div className="formInput2">
                                         <label>Residencia</label>
                                             <input className="inputClass" type="text" id="address"
-                                                 value={values.address} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.address} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.address && touched.address && <p>{errors.address}</p>}
                                         <label>Contacto</label>
                                             <input className="inputClass" type="number" placeholder="contacto1" id="contact"
-                                                 value={values.contact} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.contact} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.contact && touched.contact && <p>{errors.contact}</p>}
                                             <input className="inputClass" type="number"  placeholder="contacto2"/> 
                                         <label>Email</label>
                                             <input className="inputClass" type="text" id="email"
-                                                 value={values.email} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.email} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.email && touched.email && <p>{errors.email}</p>}
                                         <label>NUIT</label>
                                             <input className="inputClass" type="number" id="nuit"
-                                                 value={values.nuit} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.nuit} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.nuit && touched.nuit && <p>{errors.nuit}</p>}
                                         <label>Numero de Dependentes</label>
                                             <input className="inputClass" type="number" id="dependents"
-                                                 value={values.dependents} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.dependents} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.dependents && touched.dependents && <p>{errors.dependents}</p>}
                                     </div>
                                     <div className="formInput3">
@@ -214,8 +227,6 @@ const NewEmployee = ({ inputs, title }) => {
                                                 return <option key={department.id} value={department.id}>{department.name}</option>
                                             })
                                             : null}
-                                            {/* <option value="Contabilidade">Contabilidade</option>
-                                            <option value="Recursos Humano">RH</option> */}
                                         </select>
                                         {errors.department_id && touched.department_id && <p>{errors.department_id}</p>}
                                     <label>Cargo</label>
@@ -226,12 +237,10 @@ const NewEmployee = ({ inputs, title }) => {
                                                 return <option key={position.id} value={position.id}>{position.name}</option>
                                             })
                                             : null}
-                                            {/* <option value="Contabilista">Contabilista</option>
-                                            <option value="Recursos Humanos">Rh</option> */}
                                         </select>   
                                         {errors.position_id && touched.position_id && <p>{errors.position_id}</p>}                                 
                                     <label>Data de inicio</label>
-                                        <DatePicker className="DatePicker" dateFormat="dd/MM/yyyy" selected={values.start_date} 
+                                        <DatePicker className="DatePicker" dateFormat="dd/MM/yyyy"  selected={values.start_date} 
                                                      id="start_date"
                                                     //  name="data"
                                                     onChange={start_date => setFieldValue('start_date', start_date)}
@@ -256,11 +265,11 @@ const NewEmployee = ({ inputs, title }) => {
                                 <div className="formInput2">
                                     <label>Salario Base</label>
                                         <input className="inputClass" type="number" id="salary"
-                                                 value={values.salary} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.salary} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.salary && touched.salary && <p>{errors.salary}</p>}   
                                     <label>Subsidio</label>
-                                        <input className="inputClass" type="number" defaultValue={0} id="bonus"
-                                                 value={values.bonus} onChange={handleChange} onBlur={handleBlur}/>
+                                        <input className="inputClass" type="number"  id="bonus"
+                                                 defaultValue={data.bonus} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.bonus && touched.bonus && <p>{errors.bonus}</p>}
                                 </div>                            
                             </div>
@@ -270,19 +279,19 @@ const NewEmployee = ({ inputs, title }) => {
                             <div className="divForm12" >
                                 <label>Nome do Banco</label>
                                     <input className="inputClass" type="text" id="bank_name"
-                                                 value={values.bank_name} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.bank_name} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.bank_name && touched.bank_name && <p>{errors.bank_name}</p>}
                                 <label>Numero da Conta Bancaria</label>
                                     <input className="inputClass" type="number" id="bank_account"
-                                                 value={values.bank_account} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.bank_account} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.bank_account && touched.bank_account && <p>{errors.bank_account}</p>}
                                 <label>NIB</label>
                                     <input className="inputClass" type="number" id="nib"
-                                                 value={values.nib} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.nib} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.nib && touched.nib && <p>{errors.nib}</p>}
                                 <label>Numero de Seg. Social</label>   
                                 <input className="inputClass" type="number" id="social_security"
-                                                 value={values.social_security} onChange={handleChange} onBlur={handleBlur}/>
+                                                 defaultValue={data.social_security} onChange={handleChange} onBlur={handleBlur}/>
                                                   {errors.social_security && touched.social_security && <p>{errors.social_security}</p>}                       
                             </div>
                         </div>
@@ -296,6 +305,6 @@ const NewEmployee = ({ inputs, title }) => {
     )
 }
 
-export default NewEmployee
+export default EditEmployee
 
 

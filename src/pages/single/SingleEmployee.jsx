@@ -10,6 +10,9 @@ import { useEffect, useState } from "react"
 
 const SingleEmployee = () => {
     const [data, setData] = useState({});
+    // const params = useParams();
+    // console.log(params)
+
   
     useEffect(() => {
         async function fetch() {

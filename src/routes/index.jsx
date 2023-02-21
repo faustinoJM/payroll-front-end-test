@@ -3,6 +3,7 @@ import React from 'react'
 import { Routes, Route, Navigate, useLocation} from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import EditDepartment from '../pages/edit/EditDepartment';
+import EditEmployee from '../pages/edit/EditEmployee';
 import EditPosition from '../pages/edit/EditPosition';
 import Home from '../pages/home/Home';
 import List from '../pages/list/List';
@@ -38,6 +39,7 @@ export default function Routers() {
       <Route path="employees">
         <Route index element={<RouteAuth isPrivate={true}><ListEmployee listName={"Funcionarios"} listPath={'employees'} /></RouteAuth>} />
         <Route path=":employeeId" element={<RouteAuth isPrivate={true}><SingleEmployee/></RouteAuth>} />
+        <Route path="update/:employeeId" element={<RouteAuth isPrivate={true}><EditEmployee title="Editar Funcionario"/></RouteAuth>} />
         <Route path="new" element={<RouteAuth isPrivate={true}><NewEmployee title="Add novo Funcionario" /> </RouteAuth>} />
       </Route>
       <Route path="positions">

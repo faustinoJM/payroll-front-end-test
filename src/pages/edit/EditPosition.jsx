@@ -42,10 +42,11 @@ const EditPosition = ({ inputs, title }) => {
     })
     const { values, errors, handleChange, touched, isSubmitting, handleBlur, handleSubmit} = useFormik({
         initialValues: {
-            name: "",
+            name: data.name,
             description: "",
         },
         validationSchema: schema,
+        enableReinitialize: true,
         onSubmit 
     })
     console.log(errors)

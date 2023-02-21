@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
 import Datatable from "../../components/datatable/Datatable"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import api from "../../services/api"
 
 const employeeColumns = [
@@ -31,6 +31,7 @@ const employeeColumns = [
 
 const ListEmployee = ({ listName, listPath }) => {
     const [userRows, setUserRows] = useState([]);
+ 
     useEffect(() => {
         async function fetchData() {
             const response = await api.get(listPath)
