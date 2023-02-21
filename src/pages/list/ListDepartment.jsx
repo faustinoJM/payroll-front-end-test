@@ -9,7 +9,7 @@ import api from "../../services/api"
 const departmentColumn = [
     { field: 'id', headerName: 'ID', width: 100,pinnable: true },
     { field: 'name', headerName: 'NOME DO DEPARTMENTO', width: 230},
-    { field: "employee_id", headerName:"TOTAL FUNCIONARIO", width: 230 },
+    { field: "total_employee", headerName:"TOTAL FUNCIONARIO", width: 230 },
 ]
 
 const ListDepartment = ({ listName, listPath }) => {

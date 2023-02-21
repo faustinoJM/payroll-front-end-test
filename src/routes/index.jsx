@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Routes, Route, Navigate, useLocation} from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import EditDepartment from '../pages/edit/EditDepartment';
+import EditPosition from '../pages/edit/EditPosition';
 import Home from '../pages/home/Home';
 import List from '../pages/list/List';
 import ListDepartment from '../pages/list/ListDepartment';
@@ -40,12 +42,12 @@ export default function Routers() {
       </Route>
       <Route path="positions">
         <Route index element={ <RouteAuth isPrivate={true}><ListPosition listName={"Cargo"} listPath={"positions"}/></RouteAuth>} />
-        <Route path=":positionId" element={<RouteAuth isPrivate={true}><Single/></RouteAuth>} />
+        <Route path="update/:positionId" element={<RouteAuth isPrivate={true}><EditPosition title="Editar Cargo"/></RouteAuth>} />
         <Route path="new" element={<RouteAuth isPrivate={true}><NewPosition title="Add novo Cargo" /></RouteAuth>} />
       </Route>
       <Route path="departments">
         <Route index element={<RouteAuth isPrivate={true}><ListDepartment listName={"Departamentos"} listPath={"departments"}/></RouteAuth>} />
-        <Route path=":departmentId" element={<RouteAuth isPrivate={true}><Single/></RouteAuth>} />
+        <Route path="update/:departmentId" element={<RouteAuth isPrivate={true}><EditDepartment title="Editar Departamento"/></RouteAuth>} />
         <Route path="new" element={<RouteAuth isPrivate={true}><NewDepartment title="Add novo Departamento"/></RouteAuth>} />
       </Route>
       <Route path="payrolls">

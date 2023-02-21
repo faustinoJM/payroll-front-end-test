@@ -4,13 +4,15 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom"
 import { useState } from "react";
 import { DataGridPro } from "@mui/x-data-grid-pro";
+import api from "../../services/api";
 
 
 const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
 //   const [data, setData] = useState(userRows);
 //   console.log(data)
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id, router) => {
+    await api.delete(`${router}/${id}`)
     setUserRows(userRows.filter(item => item.id !== id))
   } 
 
@@ -22,16 +24,16 @@ const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        {listPath === "payrolls" || "employees" ? 
+                        {(listPath === "payrolls") || (listPath === "employees" ) ? 
                             <Link to={`/${listPath}/${params.row.id}`} style={{textDecoration: "none"}}>
                                 <div className="viewButton">Ver</div>
                             </Link>
                             :
                             ""}
-                        <Link to="" style={{textDecoration: "none"}}>
+                        <Link to={`/${listPath}/update/${params.row.id}`} style={{textDecoration: "none"}}>
                             <div className="editButton">Editar</div>
                         </Link>
-                        <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>Remover</div>
+                        <div className="deleteButton" onClick={() => handleDelete(params.row.id, listPath)}>Remover</div>
                     </div>
                 )
             }

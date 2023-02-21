@@ -9,7 +9,7 @@ import api from "../../services/api"
 const positionColumns = [
     { field: 'id', headerName: 'ID', width: 100,pinnable: true },
     { field: 'name', headerName: 'NOME DO CARGO', width: 230},
-    { field: "employee_id", headerName:"TOTAL FUNCIONARIO", width: 230 },
+    { field: "total_employee", headerName:"TOTAL FUNCIONARIO", width: 230 },
 
 ]
 
