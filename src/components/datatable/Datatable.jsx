@@ -2,19 +2,41 @@ import "./datatable.scss";
 import { DataGrid } from '@mui/x-data-grid';
 // import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGridPro } from "@mui/x-data-grid-pro";
 import api from "../../services/api";
 
 
 const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
-//   const [data, setData] = useState(userRows);
+   const [data, setData] = useState(userRows);
 //   console.log(data)
+//   const [year, setYear] = useState(2020);
+//   const [month, setMonth] = useState();
 
-  const handleDelete = async (id, router) => {
+useEffect(() => {
+    async function fetchData() {
+        const response = await api.get("payrolls")
+        setData(response.data)
+
+    }
+    fetchData()
+  
+}, [])
+
+    const submitByYear = async (e) => {
+        setUserRows(data.filter(row => row.year === +e))
+        console.log(data.filter(row => row.year === +e))
+    }
+
+    const submitByMonth = async (e) => {
+        setUserRows(data.filter(row => row.month === e))
+        console.log(data.filter(row => row.month === e))
+    }
+
+    const handleDelete = async (id, router) => {
     await api.delete(`${router}/${id}`)
     setUserRows(userRows.filter(item => item.id !== id))
-  } 
+    } 
 
     const actionColumn = [
         { 
@@ -46,29 +68,29 @@ const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
                 {listPath === "payrolls" ? 
                 <div className="anoMes">
                     <label>Ano: </label>
-                        <select id="year" name="year" onChange={e => (e.target.value)}>
+                        <select id="year" name="year" onChange={e => submitByYear(e.target.value)}>
                             <option value="">Selecione Ano</option>
-                            <option value="janeiro">2020</option>
-                            <option value="fevereiro">2021</option>
-                            <option value="marco">2022</option>
-                            <option value="abril">2023</option>
-                            <option value="maio">2024</option>
+                            <option >2020</option>
+                            <option >2021</option>
+                            <option >2022</option>
+                            <option >2023</option>
+                            <option >2024</option>
                         </select>
                     <label>Mes: </label>
-                        <select id="mouth" name="mouth" onChange={e => (e.target.value)}>
-                            <option value="">Selecione Mes</option>
-                            <option value="janeiro">Janeiro</option>
-                            <option value="fevereiro">Fevereiro</option>
-                            <option value="marco">Marco</option>
-                            <option value="abril">Abril</option>
-                            <option value="maio">Maio</option>
-                            <option value="junho">Junho</option>
-                            <option value="julho">Julho</option>
-                            <option value="agosto">Agosto</option>
-                            <option value="setembro">Setembro</option>
-                            <option value="outubro">Outubro</option>
-                            <option value="novembro">Novembro</option>
-                            <option value="dezembro">Dezembro</option>
+                        <select id="mouth" name="mouth" onChange={e => submitByMonth(e.target.value)} >
+                            <option selected="true" disabled="disabled">Selecione Mes</option>
+                            <option value="Janeiro">Janeiro</option>
+                            <option value="Fevereiro">Fevereiro</option>
+                            <option value="Marco">Marco</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Maio">Maio</option>
+                            <option value="Junho">Junho</option>
+                            <option value="Julho">Julho</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Setembro">Setembro</option>
+                            <option value="Outubro">Outubro</option>
+                            <option value="Novembro">Novembro</option>
+                            <option value="Dezembro">Dezembro</option>
                         </select>
                 </div> 
                     :  ""

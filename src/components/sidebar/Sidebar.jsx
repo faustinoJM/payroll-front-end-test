@@ -63,10 +63,16 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <p className="title">FOLHA DE SALARIO</p>
+                    <Link to="/payrolls/input" style={{textDecoration: "none"}}>
+                        <li>
+                            <PointOfSaleOutlinedIcon className="icon" />
+                            <span>Processamento</span>
+                        </li>
+                    </Link>
                     <Link to="/payrolls" style={{textDecoration: "none"}}>
                         <li>
                             <PaymentOutlinedIcon className="icon" />
-                            <span>Salario</span>
+                            <span>Folha</span>
                         </li>
                     </Link>
                     {/* <Link to="/attendace" style={{textDecoration: "none"}}>

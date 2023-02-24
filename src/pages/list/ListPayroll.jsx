@@ -28,7 +28,7 @@ const ListPayroll = ({ listName, listPath }) => {
     const [userRows, setUserRows] = useState([]);
     useEffect(() => {
         async function fetchData() {
-            const response = await api.post(`${listPath}`, {month: 2, year: 2024})
+            const response = await api.get(`${listPath}`, {month: 2, year: 2024})
              console.log(listPath)
              console.log(response.data)
              console.log(response.data.data)
