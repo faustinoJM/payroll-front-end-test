@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css"
 
 
 const NewPayroll = ({ inputs, title }) => {
+    const navigate = useNavigate()
 
      const onSubmit = async (values, actions) => {
         console.log(values)
@@ -17,6 +18,15 @@ const NewPayroll = ({ inputs, title }) => {
         console.log("submit")
         await new Promise((resolve) => setTimeout(resolve, 100))
         actions.resetForm()
+        await api.post('payrolls', {
+            month: values.mouth,
+            year: values.year,
+            month_total_workdays: 26,
+            day_total_workhours: 8,
+        })
+        navigate("/payrolls")
+
+
      }
 
      const schema = Yup.object().shape({
@@ -55,18 +65,18 @@ const NewPayroll = ({ inputs, title }) => {
                                     <select id="mouth" name="mouth" 
                                             onChange={e => setFieldValue("mouth", e.target.value)} onBlur={handleBlur}>
                                         <option value="">Selecione Mes</option>
-                                        <option value="janeiro">Janeiro</option>
-                                        <option value="fevereiro">Fevereiro</option>
-                                        <option value="marco">Marco</option>
-                                        <option value="abril">Abril</option>
-                                        <option value="maio">Maio</option>
-                                        <option value="junho">Junho</option>
-                                        <option value="julho">Julho</option>
-                                        <option value="agosto">Agosto</option>
-                                        <option value="setembro">Setembro</option>
-                                        <option value="outubro">Outubro</option>
-                                        <option value="novembro">Novembro</option>
-                                        <option value="dezembro">Dezembro</option>
+                                        <option>Janeiro</option>
+                                        <option>Fevereiro</option>
+                                        <option>Marco</option>
+                                        <option>Abril</option>
+                                        <option>Maio</option>
+                                        <option>Junho</option>
+                                        <option>Julho</option>
+                                        <option>Agosto</option>
+                                        <option>Setembro</option>
+                                        <option>Outubro</option>
+                                        <option>Novembro</option>
+                                        <option>Dezembro</option>
                                     </select>
                                     {errors.mouth && touched.mouth && <p>{errors.mouth}</p>} 
                             </div>

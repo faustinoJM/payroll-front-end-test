@@ -10,33 +10,57 @@ import api from "../../services/api";
 const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
    const [data, setData] = useState(userRows);
 //   console.log(data)
-//   const [year, setYear] = useState(2020);
-//   const [month, setMonth] = useState();
+  const [year, setYear] = useState(0);
+  const [month, setMonth] = useState("");
 
 useEffect(() => {
     async function fetchData() {
         const response = await api.get("payrolls")
-        setData(response.data)
 
+        setData(response.data)
+    
+        console.log(year)
+        console.log(month)
     }
-    fetchData()
-  
-}, [])
+        fetchData()
+    }, [year, month])
 
     const submitByYear = async (e) => {
-        setUserRows(data.filter(row => row.year === +e))
-        console.log(data.filter(row => row.year === +e))
+        setYear(e)
+        setUserRows(data.filter(row => (row.year === +e) && (row.month === month)))
+        // console.log(data.filter(row => row.year === +e))
+        
     }
 
     const submitByMonth = async (e) => {
-        setUserRows(data.filter(row => row.month === e))
-        console.log(data.filter(row => row.month === e))
+        // console.log("kkk: ",e, year)
+        setMonth(e)
+        setUserRows(data.filter(row => (row.month === e) && (row.year === +year)))
+        // console.log(data.filter(row => row.month === month))
+        
     }
 
     const handleDelete = async (id, router) => {
     await api.delete(`${router}/${id}`)
     setUserRows(userRows.filter(item => item.id !== id))
     } 
+
+    const onCellEditCommit = ({ id, field, value }) => {
+        api.put(`payrolls/${id}`, {[field]: value}).then(response => console.log(response))
+
+            // console.log("id: "+id+" "+field + ": "+ value)
+            // console.log("zabuza: ", {[field]: value})
+        
+            setUserRows((prevData) =>
+            prevData.map((item) =>
+              item.id === id ? { ...item, [field]: value } : item
+            )
+          );
+
+            // var obj = {};
+            // obj[field] = value;
+            // console.log(obj)
+      };
 
     const actionColumn = [
         { 
@@ -46,9 +70,9 @@ useEffect(() => {
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        {(listPath === "payrolls") || (listPath === "employees" ) ? 
+                        {(listPath === "payrolls") || (listPath === "employees") ? 
                             <Link to={`/${listPath}/${params.row.id}`} style={{textDecoration: "none"}}>
-                                <div className="viewButton">Ver</div>
+                                <div className="viewButton">Imprimir</div>
                             </Link>
                             :
                             ""}
@@ -77,20 +101,20 @@ useEffect(() => {
                             <option >2024</option>
                         </select>
                     <label>Mes: </label>
-                        <select id="mouth" name="mouth" onChange={e => submitByMonth(e.target.value)} >
-                            <option selected="true" disabled="disabled">Selecione Mes</option>
-                            <option value="Janeiro">Janeiro</option>
-                            <option value="Fevereiro">Fevereiro</option>
-                            <option value="Marco">Marco</option>
-                            <option value="Abril">Abril</option>
-                            <option value="Maio">Maio</option>
-                            <option value="Junho">Junho</option>
-                            <option value="Julho">Julho</option>
-                            <option value="Agosto">Agosto</option>
-                            <option value="Setembro">Setembro</option>
-                            <option value="Outubro">Outubro</option>
-                            <option value="Novembro">Novembro</option>
-                            <option value="Dezembro">Dezembro</option>
+                        <select id="month" name="month" onChange={e => submitByMonth(e.target.value)} >
+                            <option value="">Selecione Mes</option>
+                            <option >Janeiro</option>
+                            <option >Fevereiro</option>
+                            <option >Marco</option>
+                            <option >Abril</option>
+                            <option >Maio</option>
+                            <option >Junho</option>
+                            <option >Julho</option>
+                            <option >Agosto</option>
+                            <option >Setembro</option>
+                            <option >Outubro</option>
+                            <option >Novembro</option>
+                            <option >Dezembro</option>
                         </select>
                 </div> 
                     :  ""
@@ -138,7 +162,8 @@ useEffect(() => {
                 columns={columns.concat(actionColumn)}
                 pageSize={9}
                 rowsPerPageOptions={[9]}
-                checkboxSelection
+                // checkboxSelection
+                onCellEditCommit={onCellEditCommit}
                 autoHeight        
                 initialState={{
                     pinnedColumns: { left: ['id', 'name'] },

@@ -6,6 +6,7 @@ import EditDepartment from '../pages/edit/EditDepartment';
 import EditEmployee from '../pages/edit/EditEmployee';
 import EditPosition from '../pages/edit/EditPosition';
 import Home from '../pages/home/Home';
+import InputPayroll from '../pages/list/InputPayroll';
 import List from '../pages/list/List';
 import ListDepartment from '../pages/list/ListDepartment';
 import ListEmployee from '../pages/list/ListEmployee';
@@ -54,7 +55,7 @@ export default function Routers() {
       </Route>
       <Route path="payrolls">
         <Route index element={<RouteAuth isPrivate={true}><ListPayroll listName={"Salario"} listPath={"payrolls"}/> </RouteAuth>} />
-        <Route path="input" element={<RouteAuth isPrivate={true}><ListPayroll listName={"Salario"} listPath={"payrolls"}/></RouteAuth>} />
+        <Route path="input" element={<RouteAuth isPrivate={true}><InputPayroll listName={"Salario"} listPath={"payrolls"}/></RouteAuth>} />
         <Route path="input/:payrollId" element={<RouteAuth isPrivate={true}><Single/></RouteAuth>} />
         <Route path="new" element={<RouteAuth isPrivate={true}><NewPayroll title="Add novo Pagamento" /></RouteAuth>} />
       </Route>

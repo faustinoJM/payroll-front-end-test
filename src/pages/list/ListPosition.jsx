@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import api from "../../services/api"
 
 const positionColumns = [
-    { field: 'id', headerName: 'ID', width: 100,pinnable: true },
+    { field: 'id', headerName: 'ID', width: 100,pinnable: true, hide: true },
     { field: 'name', headerName: 'NOME DO CARGO', width: 230},
     { field: "total_employee", headerName:"TOTAL FUNCIONARIO", width: 230 },
 
