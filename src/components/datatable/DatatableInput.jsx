@@ -1,4 +1,4 @@
-import "./datatable.scss";
+import "./datatableInput.scss";
 import { DataGrid, GridToolbar} from '@mui/x-data-grid';
 // import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom"
@@ -7,7 +7,7 @@ import api from "../../services/api";
 import { useDemoData } from '@mui/x-data-grid-generator';
 
 
-const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
+const DatatableInput = ({ listName, listPath, columns, userRows, setUserRows }) => {
    const [data2, setData2] = useState(userRows);
 //   console.log(data)
   const [year, setYear] = useState(0);
@@ -183,7 +183,7 @@ useEffect(() => {
     )
 }
 
-export default Datatable;
+export default DatatableInput;
 
 
 // const columns = [

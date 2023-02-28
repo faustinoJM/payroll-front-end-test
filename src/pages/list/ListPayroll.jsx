@@ -5,6 +5,7 @@ import Datatable from "../../components/datatable/Datatable"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import api from "../../services/api"
+import DatatablePayroll from "../../components/datatable/DatatablePayroll"
 
 const payrollColumns = [
     { field: 'employee_id', headerName: 'ID', width: 70, pinnable: true, headerAlign: 'center',},
@@ -47,7 +48,7 @@ const ListPayroll = ({ listName, listPath }) => {
             <Sidebar />
             <div className="listContainer">
                 <Navbar />
-                <Datatable listName={listName} listPath={listPath} columns={payrollColumns} userRows={userRows} setUserRows={setUserRows}/>
+                <DatatablePayroll listName={listName} listPath={listPath} columns={payrollColumns} userRows={userRows} setUserRows={setUserRows}/>
             </div>
         </div>
     )

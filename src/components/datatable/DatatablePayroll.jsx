@@ -1,24 +1,27 @@
-import "./datatable.scss";
+import "./datatablePayroll.scss";
 import { DataGrid, GridToolbar} from '@mui/x-data-grid';
 // import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import api from "../../services/api";
 import { useDemoData } from '@mui/x-data-grid-generator';
+import { useReactToPrint } from "react-to-print";
+import { mock } from "../../assets/mockData";
+import PrintTable from "../printTable/PrintTable";
+import { PrintButton } from "../printButton/PrintButton";
+import { read, utils, writeFileXLSX } from 'xlsx';
 
 
-const Datatable = ({ listName, listPath, columns, userRows, setUserRows }) => {
+
+
+const DatatablePayroll = ({ listName, listPath, columns, userRows, setUserRows }) => {
    const [data2, setData2] = useState(userRows);
 //   console.log(data)
   const [year, setYear] = useState(0);
   const [month, setMonth] = useState("");
-
-  const { data, loading } = useDemoData({
-    dataSet: userRows,
-    rowLength: 4,
-    maxColumns: 6,
-  });
-
+  const componentRef = useRef();
+  const [single, setSingle] = useState({});
+  const mockData = mock
 
 useEffect(() => {
     async function fetchData() {
@@ -69,6 +72,29 @@ useEffect(() => {
             // console.log(obj)
       };
 
+      const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: 'emp-data',
+        // onAfterPrint: () => alert('Print sucess')
+    })
+
+      const handleSingle = (id) => {
+        // const response = await 
+        api.get(`payrolls/${id}`).then(response => setSingle(response.data))
+      
+        // setSingle(response.data)
+        console.log(single)
+        handlePrint()
+      }
+
+    const exportFile = useCallback(() => {
+        const ws = utils.json_to_sheet(userRows);
+        const wb = utils.book_new();
+        utils.book_append_sheet(wb, ws, "Data");
+        writeFileXLSX(wb, "SheetJSReactAoO.xlsx");
+      }, []);
+     
+
     const actionColumn = [
         { 
             field: "action", 
@@ -77,15 +103,9 @@ useEffect(() => {
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        {(listPath === "payrolls") || (listPath === "employees") ? 
-                            <Link to={`/${listPath}/${params.row.id}`} style={{textDecoration: "none"}}>
-                                <div className="viewButton">Imprimir</div>
-                            </Link>
-                            :
-                            ""}
-                        <Link to={`/${listPath}/update/${params.row.id}`} style={{textDecoration: "none"}}>
-                            <div className="editButton">Editar</div>
-                        </Link>
+                        {/* <Link to={`/${listPath}/${params.row.id}`} style={{textDecoration: "none"}}> */}
+                            <div className="viewButton" onClick={() => handleSingle(params.row.id)}>Imprimir</div>
+                        {/* </Link> */}
                         <div className="deleteButton" onClick={() => handleDelete(params.row.id, listPath)}>Remover</div>
                     </div>
                 )
@@ -94,9 +114,11 @@ useEffect(() => {
     ]
     return (
         <div className="datatable">
+            {listName}
             <div className="datatableTitle">
-                {listName}
-                {listPath === "payrolls" ? 
+                <div className="link" onClick={exportFile}>
+                    Exportar Excell
+                </div>
                 <div className="anoMes">
                     <label>Ano: </label>
                         <select id="year" name="year" onChange={e => submitByYear(e.target.value)}>
@@ -124,11 +146,42 @@ useEffect(() => {
                             <option >Dezembro</option>
                         </select>
                 </div> 
-                    :  ""
-                }
                 <Link to={`/${listPath}/new`} className="link">
-                    Add Novo
+                    Add Nova Folha
                 </Link>
+
+                <PrintTable componentRef={componentRef} single={single} />
+                {/* <div style={{display: "none"}}>
+                <div ref={componentRef} style={{width: '100%', height: window.innerHeight}}>
+                <h1 className="text-center my-3 border py-2">
+                    Employee data
+                </h1>
+                <table className="w-75 mx-auto" bordered>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Absences.</th>
+                            <th>IRPS</th>
+                            <th>INSS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                          <tr>
+                            <td>{single.employee_uid}</td>
+                            <td>{single.absences}</td>
+                            <td>{single.irps}</td>
+                            <td>{single.inss}</td>
+                        </tr>
+                            
+                    </tbody>
+                </table>
+                <br/><br/> <br/>
+                
+                <div style={{borderBottom: "2px solid red", width: "100px", margin: "0 auto"}}></div>
+                <h1>Assinatura</h1>
+
+            </div>
+                </div> */}
             </div>
 
             <DataGrid
@@ -175,60 +228,12 @@ useEffect(() => {
                 initialState={{
                     pinnedColumns: { left: ['id', 'name'] },
                 }}           
-                components={{ Toolbar: GridToolbar }}   
-                componentsProps={{ toolbar: { csvOptions: { allColumns: true } } }}
+
                 />
                 
         </div>
     )
 }
 
-export default Datatable;
+export default DatatablePayroll;
 
-
-// const columns = [
-//     { field: 'id', headerName: 'ID', width: 70 },
-//     { field: 'firstName', headerName: 'First name', width: 130 },
-//     { field: 'lastName', headerName: 'Last name', width: 130 },
-//     {
-//       field: 'age',
-//       headerName: 'Age',
-//       type: 'number',
-//       width: 90,
-//     },
-//     {
-//       field: 'fullName',
-//       headerName: 'Full name',
-//       description: 'This column has a value getter and is not sortable.',
-//       sortable: false,
-//       width: 160,
-//       valueGetter: (params) =>
-//         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-//     },
-//   ];
-  
-//   const rows = [
-//     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-//     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-//     { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-//     { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-//     { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-//     { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-//     { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-//     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-//     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-//   ];
-  
-//   const Datatable = () => {
-//       return (
-//           <div className="datatable">
-//               <DataGrid
-//                   rows={rows}
-//                   columns={columns}
-//                   pageSize={5}
-//                   rowsPerPageOptions={[5]}
-//                   checkboxSelection
-//               />
-//           </div>
-//       )
-//   }

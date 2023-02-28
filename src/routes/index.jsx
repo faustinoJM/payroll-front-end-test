@@ -54,8 +54,8 @@ export default function Routers() {
         <Route path="new" element={<RouteAuth isPrivate={true}><NewDepartment title="Add novo Departamento"/></RouteAuth>} />
       </Route>
       <Route path="payrolls">
-        <Route index element={<RouteAuth isPrivate={true}><ListPayroll listName={"Salario"} listPath={"payrolls"}/> </RouteAuth>} />
-        <Route path="input" element={<RouteAuth isPrivate={true}><InputPayroll listName={"Salario"} listPath={"payrolls"}/></RouteAuth>} />
+        <Route index element={<RouteAuth isPrivate={true}><ListPayroll listName={"Folha Salario"} listPath={"payrolls"}/> </RouteAuth>} />
+        <Route path="input" element={<RouteAuth isPrivate={true}><InputPayroll listName={"Processamento Salario"} listPath={"payrolls"}/></RouteAuth>} />
         <Route path="input/:payrollId" element={<RouteAuth isPrivate={true}><Single/></RouteAuth>} />
         <Route path="new" element={<RouteAuth isPrivate={true}><NewPayroll title="Add novo Pagamento" /></RouteAuth>} />
       </Route>
