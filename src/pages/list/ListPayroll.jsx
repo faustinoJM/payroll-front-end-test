@@ -9,8 +9,8 @@ import DatatablePayroll from "../../components/datatable/DatatablePayroll"
 
 const payrollColumns = [
     { field: 'employee_id', headerName: 'ID', width: 70, pinnable: true, headerAlign: 'center',},
-    { field: 'employee_name', headerName: 'Nome', width: 100, headerAlign: 'center',},
-    { field: "departament_name", headerName:"Departemento", width: 120,  align:'center', headerAlign: 'center', },
+    { field: 'employee_name', headerName: 'Nome', width: 150, headerAlign: 'center',},
+    { field: "departament_name", headerName:"Departemento", width: 150,  align:'center', headerAlign: 'center', },
     { field: "position_name", headerName:"Cargo", width: 180,  align:'center', headerAlign: 'center', },
     { field: "salary_base", headerName: "Salario Base", width: 130, align:'center', headerAlign: 'center',},
     { field: "total_overtime", headerName: "Total Horas Extras", width: 135,  align:'center', headerAlign: 'center',},

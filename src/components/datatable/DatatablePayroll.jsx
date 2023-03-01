@@ -7,9 +7,9 @@ import api from "../../services/api";
 import { useDemoData } from '@mui/x-data-grid-generator';
 import { useReactToPrint } from "react-to-print";
 import { mock } from "../../assets/mockData";
-import PrintTable from "../printTable/PrintTable";
 import { PrintButton } from "../printButton/PrintButton";
 import { read, utils, writeFileXLSX } from 'xlsx';
+import PrintPayslip from "../printPayslip/PrintPayslip";
 
 
 
@@ -37,7 +37,8 @@ useEffect(() => {
 
     const submitByYear = async (e) => {
         setYear(e)
-        setUserRows(data2.filter(row => (row.year === +e) && (row.month === month)))
+        setUserRows(data2.filter(row => (row.year === +e) && (row.month === month) ))
+        // setUserRows(data2.filter(row => ((row.year === +e) && (row.month === month)) || (row.year === +e)))
         // console.log(data.filter(row => row.year === +e))
         
     }
@@ -45,7 +46,8 @@ useEffect(() => {
     const submitByMonth = async (e) => {
         // console.log("kkk: ",e, year)
         setMonth(e)
-        setUserRows(data2.filter(row => (row.month === e) && (row.year === +year)))
+        setUserRows(data2.filter(row => (row.month === e) && (row.year === +year) ))
+        // setUserRows(data2.filter(row => ((row.month === e) && (row.year === +year)) || (row.month === e)))
         // console.log(data.filter(row => row.month === month))
         
     }
@@ -92,7 +94,7 @@ useEffect(() => {
         const wb = utils.book_new();
         utils.book_append_sheet(wb, ws, "Data");
         writeFileXLSX(wb, "SheetJSReactAoO.xlsx");
-      }, []);
+      }, [userRows]);
      
 
     const actionColumn = [
@@ -123,7 +125,7 @@ useEffect(() => {
                     <label>Ano: </label>
                         <select id="year" name="year" onChange={e => submitByYear(e.target.value)}>
                             <option value="">Selecione Ano</option>
-                            <option >2020</option>
+                            <option>2020</option>
                             <option >2021</option>
                             <option >2022</option>
                             <option >2023</option>
@@ -150,7 +152,7 @@ useEffect(() => {
                     Add Nova Folha
                 </Link>
 
-                <PrintTable componentRef={componentRef} single={single} />
+                <PrintPayslip componentRef={componentRef} single={single} />
                 {/* <div style={{display: "none"}}>
                 <div ref={componentRef} style={{width: '100%', height: window.innerHeight}}>
                 <h1 className="text-center my-3 border py-2">
@@ -193,6 +195,18 @@ useEffect(() => {
                 // "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
                 //    outline: "none !important",
                 // },
+
+                "& .MuiDataGrid-row": {
+                  borderTop: 1,
+                  borderBottom: 0
+                },
+
+                "& .MuiDataGrid-cell": {
+                    border: 1,
+                    borderRight: 0,
+                    borderTop: 0,
+                    // add more css for customization
+                    },
                 // '.MuiDataGrid-virtualScroller': {
                 //     height: '260px !important',
                 //     overflowY: 'auto',
@@ -224,7 +238,8 @@ useEffect(() => {
                 rowsPerPageOptions={[9]}
                 // checkboxSelection
                 onCellEditCommit={onCellEditCommit}
-                autoHeight        
+                autoHeight    
+                showCellRightBorder={true}      
                 initialState={{
                     pinnedColumns: { left: ['id', 'name'] },
                 }}           

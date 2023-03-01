@@ -11,5 +11,5 @@ export const PrintButton = (componentRef) => {
         onAfterPrint: () => alert('Print sucess')
     })
 
-    return handlePrint()
+    return handlePrint
 }

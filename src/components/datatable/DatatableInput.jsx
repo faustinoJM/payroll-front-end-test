@@ -6,19 +6,11 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useDemoData } from '@mui/x-data-grid-generator';
 
-
 const DatatableInput = ({ listName, listPath, columns, userRows, setUserRows }) => {
    const [data2, setData2] = useState(userRows);
 //   console.log(data)
   const [year, setYear] = useState(0);
   const [month, setMonth] = useState("");
-
-  const { data, loading } = useDemoData({
-    dataSet: userRows,
-    rowLength: 4,
-    maxColumns: 6,
-  });
-
 
 useEffect(() => {
     async function fetchData() {
@@ -137,19 +129,31 @@ useEffect(() => {
                     // remove overflow hidden overwise sticky does not work
                     overflow: "unset"
                   },
-                // "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-                //    outline: "none !important",
-                // },
+                "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                   outline: "1px solid red",
+                },
                 // '.MuiDataGrid-virtualScroller': {
                 //     height: '260px !important',
                 //     overflowY: 'auto',
                 //   },
-                //   '& .MuiDataGrid-cell:first-child': {
-                //     position:"sticky",
-                //     left:"0",
-                //     zIndex:"1",
-                //     backgroundColor: "grey"
-                //   },
+                  '& .MuiDataGrid-cell:nth-child(2)': {
+                    position:"sticky",
+                    left:"0",
+                    zIndex:"1",
+                    backgroundColor: "white",
+                    border: "1px solid lightgray"
+                  },
+                // "& .MuiDataGrid-row": {
+                //   borderTop: 1,
+                //   borderBottom: 0
+                // },
+
+                    "& .MuiDataGrid-cell": {
+                    border: 1,
+                    borderRight: 0,
+                    borderTop: 0,
+                    // add more css for customization
+                    },
                 //   '& .MuiDataGrid-columnHeader:first-child': {
                 //     position:"sticky !important",
                 //     left:"0 !important",
@@ -171,12 +175,9 @@ useEffect(() => {
                 rowsPerPageOptions={[9]}
                 // checkboxSelection
                 onCellEditCommit={onCellEditCommit}
-                autoHeight        
-                initialState={{
-                    pinnedColumns: { left: ['id', 'name'] },
-                }}           
-                components={{ Toolbar: GridToolbar }}   
-                componentsProps={{ toolbar: { csvOptions: { allColumns: true } } }}
+                autoHeight      
+                // showCellRightBorder={true}  
+           
                 />
                 
         </div>
@@ -232,3 +233,7 @@ export default DatatableInput;
 //           </div>
 //       )
 //   }
+
+// "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+//     outline: "none !important",
+//  },
